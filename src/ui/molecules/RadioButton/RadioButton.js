@@ -4,9 +4,9 @@ import { withTheme } from '@ui/theme'
 import { IconRadioButtonOn, IconRadioButtonOff } from '@ui/atoms'
 
 export const RadioButton = withTheme(
-  ({ value, disabled, error, onPress, theme }) => (
+  ({ value, checked, disabled, error, onPress, theme }) => (
     <div onClick={onPress && !disabled ? onPress : undefined}>
-      {value ? (
+      {checked ? (
         <IconRadioButtonOn
           color={disabled ? theme.pallete.whiteSmoke : undefined}
         />
@@ -18,7 +18,8 @@ export const RadioButton = withTheme(
 )
 
 RadioButton.propTypes = {
-  value: PropTypes.bool,
+  value: PropTypes.string.isRequired,
+  checked: PropTypes.bool,
   error: PropTypes.string,
   disabled: PropTypes.bool,
   onPress: PropTypes.func,

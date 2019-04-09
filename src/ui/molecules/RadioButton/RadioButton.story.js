@@ -5,8 +5,9 @@ import { action } from '@storybook/addon-actions'
 import { RadioButton } from './RadioButton'
 
 storiesOf('ui/molecules', module).add('RadioButton', () => (
-  <RadioButton
-    value={boolean('value', false)}
+  <RadioButton 
+    value={text('value', 'some')}
+    checked={boolean('checked', false)}
     error={text('error', '')}
     disabled={boolean('disabled', false)}
     onPress={action('onPress')}
