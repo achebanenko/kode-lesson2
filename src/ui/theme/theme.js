@@ -5,6 +5,7 @@ export const theme = {
     neroGray: '#7A7A7A',
     gray2: '#222222',
     silver: '#BDBDBD',
+    gainsboro: '#D3D3D3',
     lightGray: '#A7A7A7',
     white: '#ffffff',
     darkWhite: '#F4F4F4',
