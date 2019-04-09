@@ -12,30 +12,25 @@ const Container = styled.div`
   align-items: center;
 `
 
-const InnerContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-
 export const RadioButtonGroup = ({
   //result: defaultResult = null,
-  result,
+  _state,
   options,
-  onPress,
+  default: bydefault,
   error,
   disabled,
+  onPress
 }) => {
 
-  //const [result, setResult] = React.useState(defaultResult)
+  const [result, setResult] = React.useState(bydefault || _state.result)
 
   return (
     <Container>
-      {Object.entries(options).map(([value, children]) => (
-        <InnerContainer key={value} onClick={typeof children === 'string' ? () => onPress(value) : undefined}>
+      {Object.entries(options).map(([children, value]) => (
+        <Container key={value} onClick={typeof children === 'string' ? () => {onPress(value); setResult(value)} : undefined}>
           <RadioButton
             value={value}
-            checked={value === result}
+            checked={value === _state.result || _state.result === '' && value === bydefault}
             error={error}
             disabled={disabled}
             onPress={typeof children === 'string' ? undefined : onPress}
@@ -49,16 +44,17 @@ export const RadioButtonGroup = ({
             children
           )}
           <VBox width={30} />
-        </InnerContainer>
+        </Container>
       ))}
     </Container>
   )
 }
 
 RadioButtonGroup.propTypes = {
-  result: PropTypes.string,
   options: PropTypes.object.isRequired,
-  onPress: PropTypes.func.isRequired,
+  default: PropTypes.string,
   error: PropTypes.string,
   disabled: PropTypes.bool,
+
+  onPress: PropTypes.func.isRequired,
 }
