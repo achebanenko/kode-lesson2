@@ -1,58 +1,76 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { styled } from '@ui/theme'
-import { VBox, Flex1 } from '@ui/atoms'
+import { styled, withTheme } from '@ui/theme'
+import { HBox, VBox, Flex1, FieldContainer } from '@ui/atoms'
 import { Body2 } from '@ui/atoms/Typography'
-import { RadioButton } from '@ui/molecules'
+import { RadioButton, FormLabel } from '@ui/molecules'
 
-const Container = styled.div`
+const InnerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+`
+
+const OptionContainer = styled.div`
+  display: flex;
   align-items: center;
 `
 
-export const RadioButtonGroup = ({
-  //result: defaultResult = null,
-  _state,
-  options,
-  default: bydefault,
-  error,
-  disabled,
-  onPress
-}) => {
+export const RadioButtonGroup = withTheme(
+  ({
+    theme,
+    _storyState,
+    name,
+    label,
+    value,
+    options,
+    error,
+    disabled,
+    onPress
+  }) => {
 
-  const [result, setResult] = React.useState(bydefault || _state.result)
+    if(!_storyState) _storyState = { value: '' }
 
-  return (
-    <Container>
-      {Object.entries(options).map(([children, value]) => (
-        <Container key={value} onClick={typeof children === 'string' ? () => {onPress(value); setResult(value)} : undefined}>
-          <RadioButton
-            value={value}
-            checked={value === _state.result || _state.result === '' && value === bydefault}
-            error={error}
-            disabled={disabled}
-            onPress={typeof children === 'string' ? undefined : onPress}
-          />
-          <VBox width={12} />
-          {typeof children === 'string' ? (
-            <Flex1>
-              <Body2>{children}</Body2>
-            </Flex1>
-          ) : (
-            children
-          )}
-          <VBox width={30} />
-        </Container>
-      ))}
-    </Container>
-  )
-}
+    return (
+      <FieldContainer>
+        <FormLabel>{label}</FormLabel>
+        <HBox height={theme.paddings.half} />
+        <InnerContainer>
+          {options.map(option => (
+            <OptionContainer key={option.value} 
+              onClick={typeof option.label === 'string' ? () => onPress(option.value) : undefined}
+            >
+              <RadioButton
+                value={option.value}
+                checked={option.value === _storyState.value || (_storyState.value === '' && option.value === value)}
+                error={error}
+                disabled={disabled}
+                onPress={typeof option.label === 'string' ? undefined : onPress}
+              />
+              <VBox width={12} />
+              {typeof option.label === 'string' ? (
+                <Flex1>
+                  <Body2>{option.label}</Body2>
+                </Flex1>
+              ) : (
+                option.label
+              )}
+              <VBox width={30} />
+            </OptionContainer>
+          ))}
+        </InnerContainer>
+      </FieldContainer>
+    )
+  }
+)
 
 RadioButtonGroup.propTypes = {
-  options: PropTypes.object.isRequired,
-  default: PropTypes.string,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
   error: PropTypes.string,
   disabled: PropTypes.bool,
 

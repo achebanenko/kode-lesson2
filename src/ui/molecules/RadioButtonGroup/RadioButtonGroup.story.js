@@ -6,19 +6,20 @@ import { action } from '@storybook/addon-actions'
 import { withState } from '@dump247/storybook-state'
 
 storiesOf('ui/molecules', module).add('RadioButtonGroup', 
-  withState({ result: '' })(({ store }) => {
+  withState({ value: '' })(({ store }) => {
     return (
-      <RadioButtonGroup
-        options={object('options', {'муж.': 'male', 'жен.': 'female'})}
-        default={radios('default', {'male': 'male', 'female': 'female'})}
+      <RadioButtonGroup 
+        name={text('name','gender')}
+        options={object('options', [{value: 'male', label: 'муж.'}, {value: 'female', label: 'жен.'}])}
+        value={radios('value', {'male': 'male', 'female': 'female'}, '')}
         error={text('error', '')}
         disabled={boolean('disabled', false)}
 
         onPress={ value => {
-          store.set({ result: value })
+          store.set({ value })
           action('onPress')(value)
         }}
-        _state={object('_state', { result: store.state.result} )}
+        _storyState={object('_storyState', { value: store.state.value} )}
       />
     )
   })
