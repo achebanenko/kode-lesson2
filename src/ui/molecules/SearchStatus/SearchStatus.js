@@ -25,7 +25,7 @@ export const SearchStatus = withTheme(({ status, theme }) => (
     {status === 'initial' ? <HLevel5>Начните набирать</HLevel5> : null}
     {status === 'notFound' ? (
       <NotFound>
-        <img src={NotFoundImage} />
+        <img src={NotFoundImage} alt="Not Found" />
         <HBox />
         <HLevel5>Ничего не найдено</HLevel5>
       </NotFound>

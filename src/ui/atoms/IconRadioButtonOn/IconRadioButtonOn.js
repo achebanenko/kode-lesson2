@@ -17,5 +17,5 @@ export const IconRadioButtonOn = withTheme(({ color, theme }) => (
 ))
 
 IconRadioButtonOn.propTypes = {
-  color: PropTypes.color,
+  color: PropTypes.string,
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { theme, styled } from '@ui/theme'
+import { IconLoader } from '@ui/atoms'
 import { ButtonText } from '@ui/atoms/Typography'
 
 const Button = styled('div')`
@@ -28,11 +29,9 @@ export const ButtonAccent = ({ loading, disabled, children, onPress }) => (
     onClick={loading || disabled ? () => undefined : onPress}
   >
     {loading ? (
-      'load'
+      <IconLoader color={theme.pallete.white} />
     ) : (
-      <ButtonText
-        color={disabled ? theme.pallete.lightGray : theme.pallete.nero}
-      >
+      <ButtonText color={disabled ? theme.pallete.lightGray : theme.pallete.nero}>
         {children}
       </ButtonText>
     )}

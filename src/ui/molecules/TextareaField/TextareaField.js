@@ -65,6 +65,7 @@ export const TextareaField = props => {
       <FieldContainer focused={focused} error={props.error}>
         <VBox width={theme.paddings.main} />
         <StyledTextarea
+          name={props.name}
           value={props.value}
           placeholder={props.placeholder}
           disabled={props.disabled}
@@ -85,6 +86,7 @@ export const TextareaField = props => {
 }
 
 TextareaField.propTypes = {
+  name: PropTypes.string,
   value: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   label: PropTypes.string,

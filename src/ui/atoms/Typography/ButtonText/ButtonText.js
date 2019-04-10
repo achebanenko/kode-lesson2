@@ -8,6 +8,7 @@ export const ButtonText = styled.div`
   line-height: 20px;
   letter-spacing: 0.5px;
   color: ${props => (props.color ? props.color : props.theme.pallete.nero)};
+  cursor: default;
 `
 
 ButtonText.propTypes = {

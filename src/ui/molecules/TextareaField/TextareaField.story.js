@@ -9,6 +9,7 @@ storiesOf('ui/molecules', module).add(
   'TextareaField',
   withState({ value: '' })(({ store }) => (
     <TextareaField
+      name={text('error', '')}
       value={store.state.value}
       disabled={boolean('disabled', false)}
       label={text('label', 'Label')}
