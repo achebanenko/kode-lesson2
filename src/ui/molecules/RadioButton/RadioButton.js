@@ -11,7 +11,10 @@ export const RadioButton = withTheme(
           color={disabled ? theme.pallete.whiteSmoke : undefined}
         />
       ) : (
-        <IconRadioButtonOff color={error ? theme.pallete.errorColor : disabled ? theme.pallete.whiteSmoke : undefined} />
+        <IconRadioButtonOff 
+          color={error 
+            ? theme.pallete.errorColor 
+            : disabled ? theme.pallete.whiteSmoke : undefined} />
       )}
     </div>
   ),

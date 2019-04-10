@@ -2,12 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { styled, withTheme } from '@ui/theme'
-import { HBox, VBox, Flex1, FieldContainer } from '@ui/atoms'
-import { Body2 } from '@ui/atoms/Typography'
+import { HBox, VBox, Flex1 } from '@ui/atoms'
+import { Body2, InputError, InputTip } from '@ui/atoms/Typography'
 import { RadioButton, FormLabel } from '@ui/molecules'
+
+const Container = styled.div`
+  min-height: 88px;
+  padding-bottom: ${({theme}) => theme.paddings.main}px;
+  display: flex;
+  flex-direction: column;
+`
 
 const InnerContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `
 
 const OptionContainer = styled.div`
@@ -24,6 +32,7 @@ export const RadioButtonGroup = withTheme(
     value,
     options,
     error,
+    tip,
     disabled,
     onPress
   }) => {
@@ -31,21 +40,22 @@ export const RadioButtonGroup = withTheme(
     if(!_storyState) _storyState = { value: '' }
 
     return (
-      <FieldContainer>
+      <Container>
         <FormLabel>{label}</FormLabel>
         <HBox height={theme.paddings.half} />
         <InnerContainer>
           {options.map(option => (
-            <OptionContainer key={option.value} 
-              onClick={typeof option.label === 'string' ? () => onPress(option.value) : undefined}
-            >
-              <RadioButton
-                value={option.value}
-                checked={option.value === _storyState.value || (_storyState.value === '' && option.value === value)}
-                error={error}
-                disabled={disabled}
-                onPress={typeof option.label === 'string' ? undefined : onPress}
-              />
+            <OptionContainer key={option.value}>
+              <div onClick={typeof option.label === 'string' ? () => onPress(option.value) : undefined}>
+                <RadioButton 
+                  name={name}
+                  value={option.value}
+                  checked={(option.value === value && _storyState.value === '') || option.value === _storyState.value}
+                  error={error}
+                  disabled={disabled}
+                  onPress={typeof option.label === 'string' ? undefined : onPress}
+                />
+              </div>
               <VBox width={12} />
               {typeof option.label === 'string' ? (
                 <Flex1>
@@ -58,7 +68,9 @@ export const RadioButtonGroup = withTheme(
             </OptionContainer>
           ))}
         </InnerContainer>
-      </FieldContainer>
+        <HBox height={theme.paddings.half} />
+        {error ? <InputError>{error}</InputError> : <InputTip>{tip}</InputTip>}
+      </Container>
     )
   }
 )
@@ -72,6 +84,7 @@ RadioButtonGroup.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   error: PropTypes.string,
+  tip: PropTypes.string,
   disabled: PropTypes.bool,
 
   onPress: PropTypes.func.isRequired,

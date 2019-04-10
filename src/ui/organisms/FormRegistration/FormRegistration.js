@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextField, RadioButtonGroup, TextareaField, ButtonAccent } from '@ui/molecules'
+import { TextField, RadioButtonGroup, TextareaField, CheckboxWithText, ButtonAccent } from '@ui/molecules'
 import { HBox } from '@ui/atoms'
 
 const initialValues = {
@@ -10,7 +10,8 @@ const initialValues = {
   phone: '',
   email: '',
   gender: '',
-  about: ''
+  about: '',
+  terms: false
 }
 
 const schema = Yup.object().shape({
@@ -25,7 +26,7 @@ const schema = Yup.object().shape({
     .max(20, 'До ${max} символов')
   ,
   phone: Yup.string()
-    .matches(/[0-9]+/, 'Только цифры')
+    .matches(/^[0-9]+$/, 'Только цифры')
     .length(10, 'Всего ${length} цифр')
     .required('Обязательное поле')
   ,
@@ -37,6 +38,9 @@ const schema = Yup.object().shape({
   ,
   about: Yup.string()
     .max(200, 'Не более ${max} символов')
+  ,
+  terms: Yup.boolean()
+    .test('agree-to-terms' ,'Вы согласны?', value => value === true)
 })
 
 const handleSubmit = values => {
@@ -53,7 +57,7 @@ export const FormRegistration = () => {
       onSubmit={handleSubmit}
       render={props => (
         <form>
-{console.log(props)}
+          {console.log(props.values)}
           <TextField key="firstname" 
             name="firstname"
             label="Ваше имя"
@@ -102,8 +106,7 @@ export const FormRegistration = () => {
             options={[{value: 'male', label: 'муж.'}, {value: 'female', label: 'жен.'}]}
             value={props.values.gender}
             onPress={value => props.setFieldValue('gender', value)}
-            onBlur={props.handleBlur}
-            error={props.touched.gender && props.errors.gender}
+            error={props.touched.firstname && props.touched.lastname && props.touched.email && props.touched.phone && props.errors.gender}
           />
           <HBox/>
 
@@ -116,7 +119,17 @@ export const FormRegistration = () => {
             onBlur={props.handleBlur}
             error={props.touched.about && props.errors.about}
           />
-          <HBox/>
+          
+          <HBox height={20} />
+          <CheckboxWithText
+            name="terms"
+            children={<div>Со всеми <a href="//link">условиями</a> согласен вторая строка</div>}
+            value={props.values.terms}
+            onPress={value => props.setFieldValue('terms', !value)}
+            error={props.touched.firstname && props.touched.lastname && props.touched.email && props.touched.phone && props.errors.terms}
+          />
+
+          <HBox height={24} />
           <ButtonAccent 
             disabled={!props.isValid} 
             onPress={props.handleSubmit}

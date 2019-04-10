@@ -10,9 +10,11 @@ storiesOf('ui/molecules', module).add('RadioButtonGroup',
     return (
       <RadioButtonGroup 
         name={text('name','gender')}
+        label={text('label', 'Пол')}
         options={object('options', [{value: 'male', label: 'муж.'}, {value: 'female', label: 'жен.'}])}
         value={radios('value', {'male': 'male', 'female': 'female'}, '')}
         error={text('error', '')}
+        tip={text('tip', '')}
         disabled={boolean('disabled', false)}
 
         onPress={ value => {
