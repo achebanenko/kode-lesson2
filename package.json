@@ -2,7 +2,7 @@
   "name": "lesson-2",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://artchebanenko.github.io/lesson-2/",
+  "homepage" : "https://vigorous-curran-3336b1.netlify.com/",
   "dependencies": {
     "connected-react-router": "^6.3.2",
     "formik": "^1.5.1",

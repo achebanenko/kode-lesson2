@@ -4,7 +4,7 @@ import history from './history';
 import App from './App'
 
 const Root = () => (
-  <Router history={history} basename="/lesson-2">
+  <Router history={history}>
     <Route component={App} />
   </Router>
 )
