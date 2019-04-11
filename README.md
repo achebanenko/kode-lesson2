@@ -66,7 +66,7 @@ molecule RadioButton
 molecule RadioButtonGroup  
 _storyState  
 
-**Registration**
+**Registration**  
 page  
 props with Formik  
 schema with Yup  
