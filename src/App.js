@@ -63,18 +63,17 @@ class App extends Component {
               )}/>
 
               <Route path="/registration" component={Registration} />
-              <Route exact path="/exchange" component={Exchange} />
-              <Route path="/modal/:selection" component={SelectCountry} />
-
-              <ModalRoute path="/exchange/router-modal" component={SelectCountry} parentPath='/exchange' {...RouterModalClasses} />
+              <Route path="/exchange" component={Exchange} />
+              <Route path="/modal/:selection" component={SelectCountry} />  
             </Switch>
-
+            
             {
               isModal 
                 ? <Route path="/modal/:selection" component={Modal} />
                 : null
             }
 
+            <ModalRoute path="/exchange/router-modal" component={SelectCountry} parentPath='/exchange' {...RouterModalClasses} />
             <ModalContainer />
           </div>
         </>
