@@ -1,18 +1,11 @@
 import React from 'react'
-import { styled } from '@ui/theme'
-import { FormRegistration } from '@ui/organisms'
 import { Header } from '@ui/molecules'
 import { PageTemplate } from '@ui/atoms'
+import { FormRegistration } from '@ui/organisms'
 
-const ContentWrapper = styled.div`
-  padding: ${({ theme }) => theme.paddings.main}px;
-`
-
-export const Registration = () => (
+export const Registration = ({ history }) => (
   <PageTemplate>
-    <Header icon="back" title="Регистрация" />
-    <ContentWrapper>
-      <FormRegistration />
-    </ContentWrapper>
+    <Header icon="back" action={() => history.push('/')} title="Регистрация" />
+    <FormRegistration  />
   </PageTemplate>
 )
