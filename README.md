@@ -34,8 +34,6 @@ react-router-modal https://github.com/davidmfoley/react-router-modal
 
 ## Результат
 
-https://artchebanenko.github.io/lesson-2/  
-
 Contents:  
 - Registration - Formik and Yup
 - Exchange
