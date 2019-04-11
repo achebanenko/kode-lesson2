@@ -34,6 +34,8 @@ react-router-modal https://github.com/davidmfoley/react-router-modal
 
 ## Результат
 
+https://vigorous-curran-3336b1.netlify.com/  
+
 Contents:  
 - Registration - Formik and Yup
 - Exchange
