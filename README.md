@@ -31,3 +31,56 @@ react-router-modal https://github.com/davidmfoley/react-router-modal
 Четверг, 12 апреля, 12:00 KGD
 
 # Процесс выполнения
+
+## Результат
+
+https://artchebanenko.github.io/lesson-2/  
+
+Contents:  
+- Registration - Formik and Yup
+- Exchange
+  - country1 - my modal with fade-in and outsideClick and display with direct URL
+  - country2 - react-router-modal with animation
+
+### Time
+
+|Task|Est|Fact|
+|-|-|-|
+|Setup|1 hour|1 hour|
+|Gender RadioButtonGroup|3 hours|4 hours|
+|FormRegistration|1 hour|1 hour|
+|CheckboxWithText|2 hours|1 hour|
+|Formik|1 hours|1 hours|
+|Yup|2 hours|2 hours|
+|***|
+|react-router, history|1 hour|1 hour|
+|Exchange layout|1 hour|1 hour|
+|My modal|3 hours|3 hours|
+|react-router-modal, transtition|2 hours|2 hours|
+
+### Workflow
+
+**Gender**  
+atoms IconRadioButtonOn IconRadioButtonOff  
+molecule RadioButton  
+molecule RadioButtonGroup  
+_storyState  
+
+**Registration**
+page  
+props with Formik  
+schema with Yup  
+
+**CheckboxWithText**  
+
+**Modal**  
+switch  
+history.push with state modal  
+styled and keyframes  
+useEffect for body.style.overflow  
+outsideClick  
+
+**react-router-modal**  
+install  
+switch  
+transition  
